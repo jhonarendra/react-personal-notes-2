@@ -146,6 +146,10 @@ async function unarchiveNote(id) {
   return { error: false, data: responseJson.data }
 }
 
+async function editNote({ id, title, body }) {
+  return { error: true, data: null}
+}
+
 async function deleteNote(id) {
   const response = await fetchWithToken(`${BASE_URL}/notes/${id}`, {
     method: 'DELETE'
@@ -172,5 +176,6 @@ export {
   getNote,
   archiveNote,
   unarchiveNote,
-  deleteNote
+  deleteNote,
+  editNote
 }

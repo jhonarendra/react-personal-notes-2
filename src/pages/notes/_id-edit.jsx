@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   ContentState, convertFromHTML, convertToRaw, EditorState
@@ -6,18 +6,22 @@ import {
 import { Editor } from 'react-draft-wysiwyg'
 import { HiArrowLeft } from 'react-icons/hi'
 import draftToHtml from 'draftjs-to-html'
-import { editNote, getNote } from '../../utils/local-data'
+import { editNote, getNote } from '../../utils/network-data'
 import NotesIdEditPageAction from '../../components/notes/NotesIdEditPageAction'
 import NotFoundMessage from '../../components/layout/NotFoundMessage'
+import LocaleContext from '../../contexts/LocaleContext'
+import { appLang, notesIdPage, notesNewPage } from '../../utils/content'
 
 export default function NotesIdEditPages() {
+  const { locale } = useContext(LocaleContext)
+  // TODO: loading
   const [form, setForm] = useState({
     id: '',
     archived: false,
     title: '',
     body: EditorState.createWithContent(
       ContentState.createFromBlockArray(
-        convertFromHTML('<b><i><u>Isi Catatan</u></i></b>')
+        convertFromHTML(notesNewPage[locale].bodyPlaceholder)
       )
     )
   })
@@ -40,20 +44,30 @@ export default function NotesIdEditPages() {
   }
 
   useEffect(() => {
-    const showNote = getNote(id)
-    if (showNote) {
-      const { title, archived, body } = showNote
-      setForm({
-        id,
-        title,
-        archived,
-        body: EditorState.createWithContent(
-          ContentState.createFromBlockArray(
-            convertFromHTML(body)
+    /**
+     * show notes
+     */
+    getNote(id)
+    .then((res) => {
+      if (!res.error) {
+        const { title, archived, body } = res.data
+        setForm({
+          id,
+          title,
+          archived,
+          body: EditorState.createWithContent(
+            ContentState.createFromBlockArray(
+              convertFromHTML(body)
+            )
           )
-        )
-      })
-    }
+        })
+      } else {
+        alert(notesIdPage[locale].notFound)
+      }
+    })
+    .catch(() => {
+      alert(appLang[locale].msg.error)
+    })
   }, [])
 
   return (
