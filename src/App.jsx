@@ -15,11 +15,12 @@ import RegisterPage from './pages/register'
 import LocaleContext from './contexts/LocaleContext'
 import { appLang } from './utils/content'
 import { getUserLogged } from './utils/network-data'
-import AuthMiddleware from './middleware/AuthMiddleware'
+import RouteMiddleware from './middleware/RouteMiddleware'
 
 function App() {
   const [auth, setAuth] = useState(null)
   const [locale, setLocale] = useState('id')
+  const [loading, setLoading] = useState(true)
 
   const toggleLocale = () => {
     localStorage.setItem('locale', (locale === 'id' ? 'en' : 'id'))
@@ -43,6 +44,7 @@ function App() {
       } else {
         setAuth(null)
       }
+      setLoading(false)
     })
 
     /**
@@ -55,58 +57,93 @@ function App() {
 
   return (
     <LocaleContext.Provider value={localeContextValue}>
-      <div className="app-container">
-        <header>
-          <h1>
-            <Link to="/">{appLang[locale].title}</Link>
-          </h1>
-          <NavMenu />
-        </header>
-        <main>
-          <Routes>
-            <Route
-              path="/"
-              element={(
-                <AuthMiddleware>
-                  <IndexPage />
-                </AuthMiddleware>
-              )}
-            />
-            <Route
-              path="/login"
-              element={<LoginPage />}
-            />
-            <Route
-              path="/register"
-              element={<RegisterPage />}
-            />
-            <Route
-              path="/archives"
-              element={<ArchivesPage />}
-            />
-            <Route
-              path="/notes"
-              element={<Navigate to="/" replace />}
-            />
-            <Route
-              path="/notes/new"
-              element={<NotesNewPages />}
-            />
-            <Route
-              path="/notes/:id"
-              element={<NotesIdPages />}
-            />
-            <Route
-              path="/notes/:id/edit"
-              element={<NotesIdEditPages />}
-            />
-            <Route
-              path="*"
-              element={<NotFoundPages />}
-            />
-          </Routes>
-        </main>
-      </div>
+      {
+        loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="app-container">
+            <header>
+              <h1>
+                <Link to="/">{appLang[locale].title}</Link>
+              </h1>
+              <NavMenu />
+            </header>
+            <main>
+              <Routes>
+                <Route
+                  path="/"
+                  element={(
+                    <RouteMiddleware middleware="auth">
+                      <IndexPage />
+                    </RouteMiddleware>
+                  )}
+                />
+                <Route
+                  path="/login"
+                  element={(
+                    <RouteMiddleware middleware="public">
+                      <LoginPage />
+                    </RouteMiddleware>
+                  )}
+                />
+                <Route
+                  path="/register"
+                  element={(
+                    <RouteMiddleware middleware="public">
+                      <RegisterPage />
+                    </RouteMiddleware>
+                    )}
+                />
+                <Route
+                  path="/archives"
+                  element={(
+                    <RouteMiddleware middleware="public">
+                      <ArchivesPage />
+                    </RouteMiddleware>
+                  )}
+                />
+                <Route
+                  path="/notes"
+                  element={(
+                    <RouteMiddleware middleware="public">
+                      <Navigate to="/" replace />
+                    </RouteMiddleware>
+                  )}
+                />
+                <Route
+                  path="/notes/new"
+                  element={(
+                    <RouteMiddleware middleware="public">
+                      <NotesNewPages />
+                    </RouteMiddleware>
+                  )}
+                />
+                <Route
+                  path="/notes/:id"
+                  element={(
+                    <RouteMiddleware middleware="public">
+                      <NotesIdPages />
+                    </RouteMiddleware>
+                  )}
+                />
+                <Route
+                  path="/notes/:id/edit"
+                  element={(
+                    <RouteMiddleware middleware="public">
+                      <NotesIdEditPages />
+                    </RouteMiddleware>
+                  )}
+                />
+                <Route
+                  path="*"
+                  element={<NotFoundPages />}
+                />
+              </Routes>
+            </main>
+          </div>
+        )
+      }
+
     </LocaleContext.Provider>
   )
 }

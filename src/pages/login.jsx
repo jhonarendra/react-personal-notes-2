@@ -1,16 +1,24 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
 import { loginPage } from '../utils/content'
+import { login, putAccessToken } from '../utils/network-data'
 
 export default function LoginPage() {
   const { locale } = useContext(LocaleContext)
   const [email, onEmailChange] = useInput('')
   const [password, onPasswordChange] = useInput('')
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    login({ email, password }).then((res) => {
+      if (!res.error) {
+        putAccessToken(res.data.accessToken)
+        navigate('/')
+      }
+    })
   }
 
   return (
