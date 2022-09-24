@@ -22,12 +22,24 @@ export default function NotesIdPages() {
   }
 
   const handleArchive = () => {
-    if (note.archived) {
-      unarchiveNote(id)
-      navigate('/archives')
-    } else {
-      archiveNote(id)
-      navigate('/')
+    if (confirm(appLang[locale].msg.confirm)) {
+      let methods = null
+      let navigateTo = '/'
+      if (note.archived) {
+        methods = unarchiveNote(id)
+        navigateTo = '/archives'
+      } else {
+        methods = archiveNote(id)
+      }
+      methods
+        .then((res) => {
+          if (!res.error) {
+            navigate(navigateTo)
+          }
+        })
+        .catch(() => {
+          alert(appLang[locale].msg.error)
+        })
     }
   }
 

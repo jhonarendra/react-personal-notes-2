@@ -6,6 +6,7 @@ const appLang = {
       archives: 'Arsip'
     },
     msg: {
+      confirm: 'Apakah anda yakin?',
       loading: 'Memuat data...',
       error: 'Ada kesalahan teknis. Coba lagi nanti.'
     }
@@ -17,6 +18,7 @@ const appLang = {
       archives: 'Archives'
     },
     msg: {
+      confirm: 'Are you sure?',
       loading: 'Loading...',
       error: 'Error. Try again later.'
     }
