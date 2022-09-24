@@ -12,6 +12,9 @@ const appLang = {
     },
     add: 'Tambah',
     cancel: 'Batal',
+    delete: 'Hapus',
+    archive: 'Arsipkan',
+    active: 'Aktifkan',
     pageNotFound: 'Halaman Tidak Ditemukan.'
   },
   en: {
@@ -27,6 +30,9 @@ const appLang = {
     },
     add: 'Add',
     cancel: 'Cancel',
+    delete: 'Delete',
+    archive: 'Archive',
+    active: 'Active',
     pageNotFound: 'Page Not Found'
   }
 }
