@@ -55,4 +55,20 @@ const registerPage = {
   }
 }
 
-export { appLang, loginPage, registerPage }
+const notePage = {
+  id: {
+    header: 'Catatan Aktif',
+    empty: 'Tidak ada catatan.'
+  },
+  en: {
+    header: 'Active Notes',
+    empty: 'Empty.'
+  }
+}
+
+export {
+  appLang,
+  loginPage,
+  registerPage,
+  notePage
+}

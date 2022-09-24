@@ -4,7 +4,7 @@ import LoadingIndicator from '../components/layout/LoadingIndicator'
 import NoteListEmpty from '../components/notes/NoteListEmpty'
 import NotesList from '../components/notes/NotesList'
 import LocaleContext from '../contexts/LocaleContext'
-import { appLang } from '../utils/content'
+import { appLang, notePage } from '../utils/content'
 import { getActiveNotes } from '../utils/network-data'
 
 export default function IndexPage() {
@@ -57,7 +57,7 @@ export default function IndexPage() {
   }, [search])
   return (
     <section className="homepage">
-      <h2>Catatan Aktif</h2>
+      <h2>{ notePage[locale].header }</h2>
       <section className="search-bar">
         <input
           type="text"
