@@ -213,7 +213,7 @@ main {
   color: var(--on-background-grey);
 }
 
-.toggle-theme, .toggle-locale {
+.toggle-theme, .toggle-locale, .button-logout {
   background-color: transparent;
   border: 0;
   cursor: pointer;

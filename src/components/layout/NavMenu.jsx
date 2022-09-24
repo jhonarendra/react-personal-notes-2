@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import LocaleContext from '../../contexts/LocaleContext'
 import { appLang } from '../../utils/content'
 import LangToggler from './LangToggler'
+import LogoutButton from './LogoutButton'
 import ThemeToggler from './ThemeToggler'
 
 export default function NavMenu() {
@@ -24,6 +25,7 @@ export default function NavMenu() {
       </nav>
       <LangToggler />
       <ThemeToggler />
+      <LogoutButton />
     </>
   )
 }
