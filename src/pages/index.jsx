@@ -15,6 +15,7 @@ export default function IndexPage() {
   const [notes, setNotes] = useState([]) // filtered notes
   const [search, setSearch] = useState('')
 
+  // TODO: useInputs
   const handleSearch = (e) => {
     setSearch(e.target.value)
   }

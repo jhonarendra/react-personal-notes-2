@@ -92,11 +92,21 @@ const notesIdPage = {
   }
 }
 
+const archivePage = {
+  id: {
+    header: 'Catatan Arsip'
+  },
+  en: {
+    header: 'Archived Notes'
+  }
+}
+
 export {
   appLang,
   loginPage,
   registerPage,
   notePage,
   notesNewPage,
-  notesIdPage
+  notesIdPage,
+  archivePage
 }
