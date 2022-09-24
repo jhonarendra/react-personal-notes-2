@@ -9,7 +9,6 @@ import ArchivesPage from './pages/archives'
 import NotesIdPages from './pages/notes/_id'
 import NotesNewPages from './pages/notes/new'
 import NavMenu from './components/layout/NavMenu'
-import NotesIdEditPages from './pages/notes/_id-edit'
 import LoginPage from './pages/login'
 import RegisterPage from './pages/register'
 import LocaleContext from './contexts/LocaleContext'
@@ -124,14 +123,6 @@ function App() {
                   element={(
                     <RouteMiddleware middleware="auth">
                       <NotesIdPages />
-                    </RouteMiddleware>
-                  )}
-                />
-                <Route
-                  path="/notes/:id/edit"
-                  element={(
-                    <RouteMiddleware middleware="auth">
-                      <NotesIdEditPages />
                     </RouteMiddleware>
                   )}
                 />

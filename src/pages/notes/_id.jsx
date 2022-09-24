@@ -102,10 +102,8 @@ export default function NotesIdPages() {
       {(!('id' in note) && !loading) ? <NotFoundMessage /> : ''}
       {loading ? <LoadingIndicator /> : ''}
 
-      {/* TODO: tidak ada edit */}
       <NotesIdPageAction
         archived={note.archived || false}
-        handleEdit={handleEdit}
         handleArchive={handleArchive}
         handleDelete={handleDelete}
       />
