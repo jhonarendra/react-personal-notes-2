@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Editor } from 'react-draft-wysiwyg'
 import {
@@ -7,16 +7,19 @@ import {
 import draftToHtml from 'draftjs-to-html'
 import AddNewPageAction from '../../components/notes/AddNewPageAction'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import { addNote } from '../../utils/local-data'
+import { addNote } from '../../utils/network-data'
+import LocaleContext from '../../contexts/LocaleContext'
+import { appLang, notesNewPage } from '../../utils/content'
 
 export default function NotesNewPages() {
+  const { locale } = useContext(LocaleContext)
   const navigate = useNavigate()
 
   const [form, setForm] = useState({
     title: '',
     body: EditorState.createWithContent(
       ContentState.createFromBlockArray(
-        convertFromHTML('<b><i><u>Isi Catatan</u></i></b>')
+        convertFromHTML(notesNewPage[locale].bodyPlaceholder)
       )
     )
   })
@@ -33,7 +36,16 @@ export default function NotesNewPages() {
     const { title } = form
     const body = draftToHtml(convertToRaw(form.body.getCurrentContent()))
     addNote({ title, body })
-    navigate('/')
+      .then((res) => {
+        if (!res.error) {
+          alert(notesNewPage[locale].msgSuccess)
+          navigate('/')
+        }
+      })
+      .catch(() => {
+        alert(appLang[locale].msg.error)
+      })
+    
   }
 
   return (
@@ -41,7 +53,7 @@ export default function NotesNewPages() {
       <div className="add-new-page__input">
         <input
           className="add-new-page__input__title"
-          placeholder="Judul"
+          placeholder={notesNewPage[locale].titlePlaceholder}
           value={form.title}
           onChange={handleChange}
         />

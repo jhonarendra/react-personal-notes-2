@@ -68,9 +68,23 @@ const notePage = {
   }
 }
 
+const notesNewPage = {
+  id: {
+    titlePlaceholder: 'Judul',
+    bodyPlaceholder: '<b><i><u>Isi Catatan</u></i></b>',
+    msgSuccess: 'Berhasil menambahkan catatan!'
+  },
+  en: {
+    titlePlaceholder: 'Title',
+    bodyPlaceholder: '<b><i><u>Notes Content</u></i></b>',
+    msgSuccess: 'Successfully add notes!'
+  }
+}
+
 export {
   appLang,
   loginPage,
   registerPage,
-  notePage
+  notePage,
+  notesNewPage
 }
