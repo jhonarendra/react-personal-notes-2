@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import {
   Link, Navigate, Route, Routes
 } from 'react-router-dom'
@@ -12,30 +12,45 @@ import NavMenu from './components/layout/NavMenu'
 import NotesIdEditPages from './pages/notes/_id-edit'
 import LoginPage from './pages/login'
 import RegisterPage from './pages/register'
+import LocaleContext from './contexts/LocaleContext'
+import { appLang } from './utils/content'
 
 function App() {
+  const [locale, setLocale] = useState('id')
+
+  const toggleLocale = () => {
+    setLocale((prevLocale) => (prevLocale === 'id' ? 'en' : 'id'))
+  }
+
+  const localeContextValue = useMemo(() => ({
+    locale,
+    toggleLocale
+  }), [locale])
+
   return (
-    <div className="app-container">
-      <header>
-        <h1>
-          <Link to="/">Aplikasi Catatan</Link>
-        </h1>
-        <NavMenu />
-      </header>
-      <main>
-        <Routes>
-          <Route path="/" element={<IndexPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/archives" element={<ArchivesPage />} />
-          <Route path="/notes" element={<Navigate to="/" replace />} />
-          <Route path="/notes/new" element={<NotesNewPages />} />
-          <Route path="/notes/:id" element={<NotesIdPages />} />
-          <Route path="/notes/:id/edit" element={<NotesIdEditPages />} />
-          <Route path="*" element={<NotFoundPages />} />
-        </Routes>
-      </main>
-    </div>
+    <LocaleContext.Provider value={localeContextValue}>
+      <div className="app-container">
+        <header>
+          <h1>
+            <Link to="/">{appLang[locale].title}</Link>
+          </h1>
+          <NavMenu />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<IndexPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/archives" element={<ArchivesPage />} />
+            <Route path="/notes" element={<Navigate to="/" replace />} />
+            <Route path="/notes/new" element={<NotesNewPages />} />
+            <Route path="/notes/:id" element={<NotesIdPages />} />
+            <Route path="/notes/:id/edit" element={<NotesIdEditPages />} />
+            <Route path="*" element={<NotFoundPages />} />
+          </Routes>
+        </main>
+      </div>
+    </LocaleContext.Provider>
   )
 }
 

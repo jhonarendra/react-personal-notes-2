@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
+import { loginPage } from '../utils/content'
 
 export default function LoginPage() {
+  const { locale } = useContext(LocaleContext)
   const [email, onEmailChange] = useInput('')
   const [password, onPasswordChange] = useInput('')
 
@@ -12,7 +15,7 @@ export default function LoginPage() {
 
   return (
     <section className="login-page">
-      <h2>Yuk, login untuk menggunakan aplikasi.</h2>
+      <h2>{loginPage[locale].header}</h2>
       <form className="input-login" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
