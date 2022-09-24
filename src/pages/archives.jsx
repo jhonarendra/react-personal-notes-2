@@ -4,6 +4,7 @@ import LoadingIndicator from '../components/layout/LoadingIndicator'
 import NoteListEmpty from '../components/notes/NoteListEmpty'
 import NotesList from '../components/notes/NotesList'
 import LocaleContext from '../contexts/LocaleContext'
+import useInput from '../hooks/useInput'
 import { archivePage, notePage } from '../utils/content'
 import { getArchivedNotes } from '../utils/network-data'
 
@@ -13,11 +14,7 @@ export default function IndexPage() {
   const [initNotes, setInitNotes] = useState(false) // flag sudah ambil notes dari api
   const [loading, setLoading] = useState(true)
   const [notes, setNotes] = useState([]) // filtered notes
-  const [search, setSearch] = useState('')
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value)
-  }
+  const [search, setSearch] = useInput('')
   
   /**
    * Inisialisasi data notes dari api
@@ -62,7 +59,7 @@ export default function IndexPage() {
           type="text"
           placeholder={notePage[locale].searchPlaceholder}
           value={search}
-          onChange={handleSearch}
+          onChange={setSearch}
         />
       </section>
       {(notes.length > 0 && !loading) ? <NotesList notes={notes} /> : ''}

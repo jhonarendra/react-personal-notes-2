@@ -10,9 +10,11 @@ import NotesIdPageAction from '../../components/notes/NotesIdPageAction'
 import NotFoundMessage from '../../components/layout/NotFoundMessage'
 import { appLang, notesIdPage } from '../../utils/content'
 import LocaleContext from '../../contexts/LocaleContext'
+import LoadingIndicator from '../../components/layout/LoadingIndicator'
 
 export default function NotesIdPages() {
   const { locale } = useContext(LocaleContext)
+  const [loading, setLoading] = useState(true)
   const [note, setNote] = useState({})
   const { id } = useParams()
   const navigate = useNavigate()
@@ -67,6 +69,7 @@ export default function NotesIdPages() {
         } else {
           alert(notesIdPage[locale].notFound)
         }
+        setLoading(false)
       })
       .catch(() => {
         alert(appLang[locale].msg.error)
@@ -75,7 +78,7 @@ export default function NotesIdPages() {
 
   return (
     <section className="detail-page">
-      { 'id' in note ? (
+      { ('id' in note && !loading) ? (
         <>
           <Link
             to="/"
@@ -95,9 +98,10 @@ export default function NotesIdPages() {
             { parser(note.body) }
           </div>
         </>
-      ) : (
-        <NotFoundMessage />
-      )}
+      ) : ''}
+      {(!('id' in note) && !loading) ? <NotFoundMessage /> : ''}
+      {loading ? <LoadingIndicator /> : ''}
+
       {/* TODO: tidak ada edit */}
       <NotesIdPageAction
         archived={note.archived || false}

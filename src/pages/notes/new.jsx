@@ -10,32 +10,28 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { addNote } from '../../utils/network-data'
 import LocaleContext from '../../contexts/LocaleContext'
 import { appLang, notesNewPage } from '../../utils/content'
+import useInput from '../../hooks/useInput'
 
 export default function NotesNewPages() {
   const { locale } = useContext(LocaleContext)
   const navigate = useNavigate()
 
-  const [form, setForm] = useState({
-    title: '',
-    body: EditorState.createWithContent(
+  const [ title, setTitle ] = useInput('')
+  const [ body, setBody ] = useState(
+    EditorState.createWithContent(
       ContentState.createFromBlockArray(
         convertFromHTML(notesNewPage[locale].bodyPlaceholder)
       )
     )
-  })
-
-  const handleChange = (e) => {
-    setForm((data) => ({ ...data, title: e.target.value }))
-  }
+  )
 
   const onEditorStateChange = (body) => {
-    setForm((data) => ({ ...data, body }))
+    setBody(body)
   }
 
   const handleSave = () => {
-    const { title } = form
-    const body = draftToHtml(convertToRaw(form.body.getCurrentContent()))
-    addNote({ title, body })
+    const bodyParsed = draftToHtml(convertToRaw(body.getCurrentContent()))
+    addNote({ title, body: bodyParsed })
       .then((res) => {
         if (!res.error) {
           alert(notesNewPage[locale].msgSuccess)
@@ -54,11 +50,11 @@ export default function NotesNewPages() {
         <input
           className="add-new-page__input__title"
           placeholder={notesNewPage[locale].titlePlaceholder}
-          value={form.title}
-          onChange={handleChange}
+          value={title}
+          onChange={setTitle}
         />
         <Editor
-          editorState={form.body}
+          editorState={body}
           toolbarClassName="toolbarClassName"
           wrapperClassName="wrapperClassName"
           editorClassName="editorClassName"
