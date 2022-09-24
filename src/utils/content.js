@@ -11,6 +11,7 @@ const appLang = {
       error: 'Ada kesalahan teknis. Coba lagi nanti.'
     },
     add: 'Tambah',
+    cancel: 'Batal',
     pageNotFound: 'Halaman Tidak Ditemukan.'
   },
   en: {
@@ -25,6 +26,7 @@ const appLang = {
       error: 'Error. Try again later.'
     },
     add: 'Add',
+    cancel: 'Cancel',
     pageNotFound: 'Page Not Found'
   }
 }

@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { HiX, HiCheck } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import PageAction from '../layout/PageAction'
+import LocaleContext from '../../contexts/LocaleContext'
+import { appLang } from '../../utils/content'
 
 function AddNewPageAction({ handleSave }) {
+  const {locale } = useContext(LocaleContext)
   const navigate = useNavigate()
 
   return (
@@ -13,7 +16,7 @@ function AddNewPageAction({ handleSave }) {
         <button
           className="action"
           type="button"
-          title="Tambah"
+          title={appLang[locale].cancel}
           onClick={() => navigate('/')}
         >
           <HiX />
@@ -21,7 +24,7 @@ function AddNewPageAction({ handleSave }) {
         <button
           className="action"
           type="button"
-          title="Tambah"
+          title={appLang[locale].add}
           onClick={() => handleSave()}
         >
           <HiCheck />
