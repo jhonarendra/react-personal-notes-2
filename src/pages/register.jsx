@@ -39,7 +39,7 @@ export default function RegisterPage() {
 
   return (
     <section className="register-page">
-      <h2>Isi form untuk mendaftar akun.</h2>
+      <h2>{ registerPage[locale].header }</h2>
       <form className="input-register" onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input
@@ -84,9 +84,9 @@ export default function RegisterPage() {
         <button type="submit">Register</button>
       </form>
       <p className="register-page__footer">
-        Sudah punya akun?
+        { registerPage[locale].footer }
         {' '}
-        <Link to="/login">Login di sini</Link>
+        <Link to="/login">{ registerPage[locale].footerLoginLink }</Link>
       </p>
     </section>
   )

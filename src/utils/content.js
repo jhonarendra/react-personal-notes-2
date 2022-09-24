@@ -36,11 +36,17 @@ const loginPage = {
 
 const registerPage = {
   id: {
+    header: 'Isi form untuk mendaftar akun.',
+    footer: 'Sudah punya akun?',
+    footerLoginLink: 'Login disini',
     msg: {
       registerSuccess: 'Akun berhasil dibuat. Silahkan login.'
     }
   },
   en: {
+    header: 'Fill the form to register account.',
+    footer: 'Already have an account?',
+    footerLoginLink: 'Login here',
     msg: {
       registerSuccess: 'User created successfully.'
     }
