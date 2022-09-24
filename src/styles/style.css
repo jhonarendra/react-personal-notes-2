@@ -139,7 +139,7 @@ main {
   margin-top: 36px;
   font-size: 18px;
 }
-.detail-page__body a {
+.detail-page__body a, .login-page__footer a, .register-page__footer a {
   text-decoration: underline;
 }
 
