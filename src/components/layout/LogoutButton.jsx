@@ -7,7 +7,8 @@ export default function LogoutButton() {
 
   const handleLogout = () => {
     if (confirm('Yakin ingin keluar?')) {
-      alert('berhasil')
+      localStorage.removeItem('accessToken')
+      window.location = '/'
     }
   }
   return (
