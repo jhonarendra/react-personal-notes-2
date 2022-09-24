@@ -10,6 +10,8 @@ import NotesIdPages from './pages/notes/_id'
 import NotesNewPages from './pages/notes/new'
 import NavMenu from './components/layout/NavMenu'
 import NotesIdEditPages from './pages/notes/_id-edit'
+import LoginPage from './pages/login'
+import RegisterPage from './pages/register'
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<IndexPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/archives" element={<ArchivesPage />} />
           <Route path="/notes" element={<Navigate to="/" replace />} />
           <Route path="/notes/new" element={<NotesNewPages />} />

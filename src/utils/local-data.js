@@ -1,3 +1,7 @@
+/**
+ * TODO: TIDAK DIPAKAI, HAPUS
+ */
+
 let notes = [
   {
     id: 'notes-1',
