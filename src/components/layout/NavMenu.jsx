@@ -16,10 +16,23 @@ export default function NavMenu() {
           <nav className="navigation">
             <ul>
               <li>
-                {pathname !== '/archives'
-                  ? <Link to="/archives" title={appLang[locale].nav.archives}>{appLang[locale].nav.archives}</Link>
-                  : <Link to="/" title={appLang[locale].nav.archives}>{appLang[locale].nav.home}</Link>}
-
+                {
+                  pathname !== '/archives' ? (
+                    <Link
+                      to="/archives"
+                      title={appLang[locale].nav.archives}
+                    >
+                      {appLang[locale].nav.archives}
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/"
+                      title={appLang[locale].nav.archives}
+                    >
+                      {appLang[locale].nav.home}
+                    </Link>
+                  )
+                }
               </li>
             </ul>
           </nav>
