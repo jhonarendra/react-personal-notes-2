@@ -10,7 +10,8 @@ const appLang = {
       loading: 'Memuat data...',
       error: 'Ada kesalahan teknis. Coba lagi nanti.'
     },
-    add: 'Tambah'
+    add: 'Tambah',
+    pageNotFound: 'Halaman Tidak Ditemukan.'
   },
   en: {
     title: 'Notes App',
@@ -23,7 +24,8 @@ const appLang = {
       loading: 'Loading...',
       error: 'Error. Try again later.'
     },
-    add: 'Add'
+    add: 'Add',
+    pageNotFound: 'Page Not Found'
   }
 }
 
