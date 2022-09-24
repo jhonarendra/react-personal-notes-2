@@ -146,8 +146,9 @@ async function unarchiveNote(id) {
   return { error: false, data: responseJson.data }
 }
 
+// TODO: hapus
 async function editNote({ id, title, body }) {
-  return { error: true, data: null}
+  return { error: true, data: null }
 }
 
 async function deleteNote(id) {
@@ -177,5 +178,5 @@ export {
   archiveNote,
   unarchiveNote,
   deleteNote,
-  editNote
+  editNote // TODO: hapus
 }

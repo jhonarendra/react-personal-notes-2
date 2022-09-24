@@ -98,6 +98,7 @@ export default function NotesIdPages() {
       ) : (
         <NotFoundMessage />
       )}
+      {/* TODO: tidak ada edit */}
       <NotesIdPageAction
         archived={note.archived || false}
         handleEdit={handleEdit}
