@@ -65,9 +65,9 @@ export default function LoginPage() {
         <button type="submit">Login</button>
       </form>
       <p className="login-page__footer">
-        Belum punya akun?
+        { loginPage[locale].footer }
         {' '}
-        <Link to="/register">Daftar di sini</Link>
+        <Link to="/register">{ loginPage[locale].footerRegisterLink }</Link>
       </p>
     </section>
   )
