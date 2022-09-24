@@ -7,22 +7,24 @@ import LogoutButton from './LogoutButton'
 import ThemeToggler from './ThemeToggler'
 
 export default function NavMenu() {
-  const { locale } = useContext(LocaleContext)
+  const { auth, locale } = useContext(LocaleContext)
   const { pathname } = useLocation()
   return (
     <>
-      <nav className="navigation">
-        <ul>
-          <li>
-            {pathname !== '/archives'
-              ? <Link to="/archives" title={appLang[locale].nav.archives}>{appLang[locale].nav.archives}</Link>
-              : <Link to="/" title={appLang[locale].nav.archives}>{appLang[locale].nav.home}</Link>}
+      {
+        auth ? (
+          <nav className="navigation">
+            <ul>
+              <li>
+                {pathname !== '/archives'
+                  ? <Link to="/archives" title={appLang[locale].nav.archives}>{appLang[locale].nav.archives}</Link>
+                  : <Link to="/" title={appLang[locale].nav.archives}>{appLang[locale].nav.home}</Link>}
 
-          </li>
-          <li />
-          <li />
-        </ul>
-      </nav>
+              </li>
+            </ul>
+          </nav>
+        ) : ''
+      }
       <LangToggler />
       <ThemeToggler />
       <LogoutButton />
