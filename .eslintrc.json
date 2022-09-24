@@ -26,6 +26,7 @@
             "required": {
                 "some": ["nesting", "id"]
             }
-        }]
+        }],
+        "no-alert": ["error", "never"]
     }
 }
