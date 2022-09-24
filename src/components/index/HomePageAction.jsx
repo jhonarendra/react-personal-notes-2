@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { HiPlus } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
+import LocaleContext from '../../contexts/LocaleContext'
+import { appLang } from '../../utils/content'
 import PageAction from '../layout/PageAction'
 
 export default function HomePageAction() {
+  const { locale } = useContext(LocaleContext)
   const navigate = useNavigate()
 
   return (
@@ -11,7 +14,7 @@ export default function HomePageAction() {
       <button
         className="action"
         type="button"
-        title="Tambah"
+        title={appLang[locale].add}
         onClick={() => navigate('/notes/new')}
       >
         <HiPlus />

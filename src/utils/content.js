@@ -9,7 +9,8 @@ const appLang = {
       confirm: 'Apakah anda yakin?',
       loading: 'Memuat data...',
       error: 'Ada kesalahan teknis. Coba lagi nanti.'
-    }
+    },
+    add: 'Tambah'
   },
   en: {
     title: 'Notes App',
@@ -21,7 +22,8 @@ const appLang = {
       confirm: 'Are you sure?',
       loading: 'Loading...',
       error: 'Error. Try again later.'
-    }
+    },
+    add: 'Add'
   }
 }
 
