@@ -97,7 +97,7 @@ function App() {
                 <Route
                   path="/archives"
                   element={(
-                    <RouteMiddleware middleware="public">
+                    <RouteMiddleware middleware="auth">
                       <ArchivesPage />
                     </RouteMiddleware>
                   )}
@@ -105,7 +105,7 @@ function App() {
                 <Route
                   path="/notes"
                   element={(
-                    <RouteMiddleware middleware="public">
+                    <RouteMiddleware middleware="auth">
                       <Navigate to="/" replace />
                     </RouteMiddleware>
                   )}
@@ -113,7 +113,7 @@ function App() {
                 <Route
                   path="/notes/new"
                   element={(
-                    <RouteMiddleware middleware="public">
+                    <RouteMiddleware middleware="auth">
                       <NotesNewPages />
                     </RouteMiddleware>
                   )}
@@ -121,7 +121,7 @@ function App() {
                 <Route
                   path="/notes/:id"
                   element={(
-                    <RouteMiddleware middleware="public">
+                    <RouteMiddleware middleware="auth">
                       <NotesIdPages />
                     </RouteMiddleware>
                   )}
@@ -129,7 +129,7 @@ function App() {
                 <Route
                   path="/notes/:id/edit"
                   element={(
-                    <RouteMiddleware middleware="public">
+                    <RouteMiddleware middleware="auth">
                       <NotesIdEditPages />
                     </RouteMiddleware>
                   )}
