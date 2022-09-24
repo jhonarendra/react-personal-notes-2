@@ -9,21 +9,21 @@ export default function NavMenu() {
   const { locale } = useContext(LocaleContext)
   const { pathname } = useLocation()
   return (
-    <nav className="navigation">
-      <ul>
-        <li>
-          {pathname !== '/archives'
-            ? <Link to="/archives" title={appLang[locale].nav.archives}>{appLang[locale].nav.archives}</Link>
-            : <Link to="/" title={appLang[locale].nav.archives}>{appLang[locale].nav.home}</Link>}
+    <>
+      <nav className="navigation">
+        <ul>
+          <li>
+            {pathname !== '/archives'
+              ? <Link to="/archives" title={appLang[locale].nav.archives}>{appLang[locale].nav.archives}</Link>
+              : <Link to="/" title={appLang[locale].nav.archives}>{appLang[locale].nav.home}</Link>}
 
-        </li>
-        <li>
-          <ThemeToggler />
-        </li>
-        <li>
-          <LangToggler />
-        </li>
-      </ul>
-    </nav>
+          </li>
+          <li />
+          <li />
+        </ul>
+      </nav>
+      <LangToggler />
+      <ThemeToggler />
+    </>
   )
 }

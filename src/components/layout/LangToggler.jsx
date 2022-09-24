@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { MdGTranslate } from 'react-icons/md'
 import LocaleContext from '../../contexts/LocaleContext'
 
 export default function LangToggler() {
@@ -7,9 +8,11 @@ export default function LangToggler() {
   return (
     <button
       type="button"
+      title={locale === 'id' ? 'Indonesia' : 'English'}
+      className="toggle-locale"
       onClick={toggleLocale}
     >
-      {locale === 'id' ? 'Indonesia' : 'English'}
+      <MdGTranslate />
     </button>
   )
 }

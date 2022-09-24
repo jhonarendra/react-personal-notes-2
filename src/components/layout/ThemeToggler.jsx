@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { capitalizeFirstLetter } from '../../utils'
+import { GrSun } from 'react-icons/gr'
+import { IoMdMoon } from 'react-icons/io'
 
 function ThemeToggler() {
   const [theme, setTheme] = useState('dark')
@@ -23,11 +24,12 @@ function ThemeToggler() {
   return (
     <button
       type="button"
+      className="toggle-theme"
       onClick={() => changeTheme(theme === 'dark' ? 'light' : 'dark')}
     >
-      {capitalizeFirstLetter(theme)}
-      {' '}
-      Theme
+      {
+        theme === 'dark' ? <IoMdMoon /> : <GrSun />
+      }
     </button>
   )
 }
