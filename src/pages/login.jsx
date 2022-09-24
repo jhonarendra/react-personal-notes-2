@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
-import { loginPage } from '../utils/content'
+import { appLang, loginPage } from '../utils/content'
 import { getUserLogged, login, putAccessToken } from '../utils/network-data'
 
 export default function LoginPage() {
@@ -13,19 +13,29 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    login({ email, password }).then((res) => {
-      if (!res.error) {
-        putAccessToken(res.data.accessToken)
-        getUserLogged().then((res) => {
-          if (!res.error) {
-            setAuth(res.data)
-          } else {
-            setAuth(null)
-          }
-          navigate('/')
-        })
-      }
-    })
+    /**
+     * 1. Login
+     * 2. Simpan access token
+     * 3. Ambil data user yang sedang login
+     */
+    login({ email, password })
+      .then((res) => {
+        if (!res.error) {
+          putAccessToken(res.data.accessToken)
+          getUserLogged()
+            .then((res) => {
+              if (!res.error) {
+                setAuth(res.data)
+              } else {
+                setAuth(null)
+              }
+              navigate('/')
+            })
+            .catch(() => {
+              alert(appLang[locale].msg.error)
+            })
+        }
+      })
   }
 
   return (
