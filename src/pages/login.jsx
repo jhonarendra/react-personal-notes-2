@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
 import { loginPage } from '../utils/content'
-import { login, putAccessToken } from '../utils/network-data'
+import { getUserLogged, login, putAccessToken } from '../utils/network-data'
 
 export default function LoginPage() {
-  const { locale } = useContext(LocaleContext)
+  const { setAuth, locale } = useContext(LocaleContext)
   const [email, onEmailChange] = useInput('')
   const [password, onPasswordChange] = useInput('')
   const navigate = useNavigate()
@@ -16,7 +16,14 @@ export default function LoginPage() {
     login({ email, password }).then((res) => {
       if (!res.error) {
         putAccessToken(res.data.accessToken)
-        navigate('/')
+        getUserLogged().then((res) => {
+          if (!res.error) {
+            setAuth(res.data)
+          } else {
+            setAuth(null)
+          }
+          navigate('/')
+        })
       }
     })
   }
