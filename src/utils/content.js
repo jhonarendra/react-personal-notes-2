@@ -58,10 +58,12 @@ const registerPage = {
 const notePage = {
   id: {
     header: 'Catatan Aktif',
+    searchPlaceholder: 'Cari berdasarkan judul ...',
     empty: 'Tidak ada catatan.'
   },
   en: {
     header: 'Active Notes',
+    searchPlaceholder: 'Search by title ...',
     empty: 'Empty.'
   }
 }

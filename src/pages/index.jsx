@@ -61,7 +61,7 @@ export default function IndexPage() {
       <section className="search-bar">
         <input
           type="text"
-          placeholder="Cari berdasarkan judul ..."
+          placeholder={notePage[locale].searchPlaceholder}
           value={search}
           onChange={handleSearch}
         />
