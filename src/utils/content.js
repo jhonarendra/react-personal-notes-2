@@ -6,6 +6,7 @@ const appLang = {
       archives: 'Arsip'
     },
     msg: {
+      loading: 'Memuat data...',
       error: 'Ada kesalahan teknis. Coba lagi nanti.'
     }
   },
@@ -16,6 +17,7 @@ const appLang = {
       archives: 'Archives'
     },
     msg: {
+      loading: 'Loading...',
       error: 'Error. Try again later.'
     }
   }

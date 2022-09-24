@@ -278,6 +278,11 @@ main {
   color: var(--on-background);
 }
 
+.loading-indicator {
+  text-align: center;
+  padding: 1rem;
+}
+
 @media screen and (min-width: 650px) {
   .notes-list {
     grid-template-columns: repeat(2, 1fr);

@@ -16,6 +16,7 @@ import LocaleContext from './contexts/LocaleContext'
 import { appLang } from './utils/content'
 import { getUserLogged } from './utils/network-data'
 import RouteMiddleware from './middleware/RouteMiddleware'
+import LoadingIndicator from './components/layout/LoadingIndicator'
 
 function App() {
   const [auth, setAuth] = useState(null)
@@ -57,18 +58,18 @@ function App() {
 
   return (
     <LocaleContext.Provider value={localeContextValue}>
-      {
-        loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div className="app-container">
-            <header>
-              <h1>
-                <Link to="/">{appLang[locale].title}</Link>
-              </h1>
-              <NavMenu />
-            </header>
-            <main>
+      <div className="app-container">
+        <header>
+          <h1>
+            <Link to="/">{appLang[locale].title}</Link>
+          </h1>
+          <NavMenu />
+        </header>
+        <main>
+          {
+            loading ? (
+              <LoadingIndicator />
+            ) : (
               <Routes>
                 <Route
                   path="/"
@@ -139,10 +140,11 @@ function App() {
                   element={<NotFoundPages />}
                 />
               </Routes>
-            </main>
-          </div>
-        )
-      }
+            )
+          }
+        </main>
+      </div>
+      
 
     </LocaleContext.Provider>
   )
