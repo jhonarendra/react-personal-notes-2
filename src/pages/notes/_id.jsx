@@ -44,8 +44,16 @@ export default function NotesIdPages() {
   }
 
   const handleDelete = () => {
-    deleteNote(id)
-    navigate('/')
+    if (confirm(appLang[locale].msg.confirm)) {
+      deleteNote(id).then(res => {
+        if (!res.error) {
+          navigate('/')
+        }
+      })
+      .catch(() => {
+        alert(appLang[locale].msg.error)
+      })
+    }
   }
 
   useEffect(() => {
