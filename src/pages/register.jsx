@@ -1,12 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
+import { appLang, registerPage } from '../utils/content'
+import { register } from '../utils/network-data'
 
 export default function RegisterPage() {
+  const { locale } = useContext(LocaleContext)
   const [name, onNameChange] = useInput('')
   const [email, onEmailChange] = useInput('')
   const [password, onPasswordChange] = useInput('')
   const [confirmPassword, onConfirmPasswordChange] = useInput('')
+
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -14,8 +20,21 @@ export default function RegisterPage() {
      * Validasi Konfirmasi Password
      */
     if (password !== confirmPassword) {
-      alert('Konfirmasi password tidak sesuai ')
+      alert('Konfirmasi password tidak sesuai')
     }
+    /**
+     * Register
+     */
+    register({ name, email, password })
+      .then((res) => {
+        if (!res.error) {
+          alert(registerPage[locale].msg.registerSuccess)
+          navigate('/login')
+        }
+      })
+      .catch(() => {
+        alert(appLang[locale].msg.error)
+      })
   }
 
   return (
