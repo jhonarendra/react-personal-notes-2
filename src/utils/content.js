@@ -15,6 +15,7 @@ const appLang = {
     delete: 'Hapus',
     archive: 'Arsipkan',
     active: 'Aktifkan',
+    back: 'Kembali',
     pageNotFound: 'Halaman Tidak Ditemukan.'
   },
   en: {
@@ -33,6 +34,7 @@ const appLang = {
     delete: 'Delete',
     archive: 'Archive',
     active: 'Active',
+    back: 'Back',
     pageNotFound: 'Page Not Found'
   }
 }

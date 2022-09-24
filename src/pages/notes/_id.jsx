@@ -19,10 +19,6 @@ export default function NotesIdPages() {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const handleEdit = () => {
-    navigate(`/notes/${id}/edit`)
-  }
-
   const handleArchive = () => {
     if (confirm(appLang[locale].msg.confirm)) {
       let methods = null
@@ -86,7 +82,7 @@ export default function NotesIdPages() {
           >
             <HiArrowLeft />
             {' '}
-            Kembali
+            { appLang[locale].back}
           </Link>
           <h3 className="detail-page__title">
             { note.title }
