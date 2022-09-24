@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import parser from 'html-react-parser'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { HiArrowLeft } from 'react-icons/hi'
 import { showFormattedDate } from '../../utils'
 import {
   archiveNote, deleteNote, getNote, unarchiveNote
-} from '../../utils/local-data'
+} from '../../utils/network-data'
 import NotesIdPageAction from '../../components/notes/NotesIdPageAction'
 import NotFoundMessage from '../../components/layout/NotFoundMessage'
+import { appLang, notesIdPage } from '../../utils/content'
+import LocaleContext from '../../contexts/LocaleContext'
 
 export default function NotesIdPages() {
+  const { locale } = useContext(LocaleContext)
   const [note, setNote] = useState({})
   const { id } = useParams()
   const navigate = useNavigate()
@@ -34,10 +37,20 @@ export default function NotesIdPages() {
   }
 
   useEffect(() => {
-    const showNote = getNote(id)
-    if (showNote) {
-      setNote(showNote)
-    }
+    /**
+     * show notes
+     */
+    getNote(id)
+      .then((res) => {
+        if (!res.error) {
+          setNote(res.data)
+        } else {
+          alert(notesIdPage[locale].notFound)
+        }
+      })
+      .catch(() => {
+        alert(appLang[locale].msg.error)
+      })
   }, [])
 
   return (

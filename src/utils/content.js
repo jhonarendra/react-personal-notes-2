@@ -81,10 +81,20 @@ const notesNewPage = {
   }
 }
 
+const notesIdPage = {
+  id: {
+    notFound: 'Catatan tidak ditemukan.'
+  },
+  en: {
+    notFound: 'Not Found.'
+  }
+}
+
 export {
   appLang,
   loginPage,
   registerPage,
   notePage,
-  notesNewPage
+  notesNewPage,
+  notesIdPage
 }
