@@ -5,10 +5,13 @@ import AuthContext from './contexts/AuthContext'
 import { getUserLogged } from './utils/network-data'
 import LoadingIndicator from './components/layout/LoadingIndicator'
 import HeaderComponent from './components/layout/HeaderComponent'
+import ThemeContext from './contexts/ThemeContext'
+import useTheme from './hooks/useTheme'
 
 function App() {
   const [auth, setAuth] = useState(null)
   const [locale, setLocale] = useState('id')
+  const [theme, changeTheme] = useTheme()
   const [loading, setLoading] = useState(true)
 
   const toggleLocale = () => {
@@ -24,6 +27,11 @@ function App() {
   const authContextValue = useMemo(() => ({
     auth,
     setAuth
+  }), [auth])
+
+  const themeContextValue = useMemo(() => ({
+    theme,
+    changeTheme
   }), [auth])
 
   useEffect(() => {
@@ -49,25 +57,38 @@ function App() {
     if (localStorage.locale && ['id', 'en'].includes(localStorage.locale)) {
       setLocale(localStorage.locale)
     }
+
+    /**
+     * Inisialisasi Theme
+     */
+    
+    if (localStorage.theme) {
+      changeTheme(localStorage.theme)
+    } else {
+      localStorage.setItem('theme', 'dark')
+      changeTheme('dark')
+    }
   }, [])
 
   return (
-    <LocaleContext.Provider value={localeContextValue}>
-      <AuthContext.Provider value={authContextValue}>
-        <div className="app-container">
-          <HeaderComponent />
-          <main>
-            {
-              loading ? (
-                <LoadingIndicator />
-              ) : (
-                <Routes />
-              )
-            }
-          </main>
-        </div>
-      </AuthContext.Provider>
-    </LocaleContext.Provider>
+    <ThemeContext.Provider value={themeContextValue}>
+      <LocaleContext.Provider value={localeContextValue}>
+        <AuthContext.Provider value={authContextValue}>
+          <div className="app-container">
+            <HeaderComponent />
+            <main>
+              {
+                loading ? (
+                  <LoadingIndicator />
+                ) : (
+                  <Routes />
+                )
+              }
+            </main>
+          </div>
+        </AuthContext.Provider>
+      </LocaleContext.Provider>
+    </ThemeContext.Provider>
   )
 }
 
