@@ -78,11 +78,11 @@ export default function NotesIdPages() {
         <>
           <Link
             to="/"
-            title="Kembali"
+            title={textApp.back}
           >
             <HiArrowLeft />
             {' '}
-            { textApp.back}
+            { textApp.back }
           </Link>
           <h3 className="detail-page__title">
             { note.title }
@@ -93,16 +93,15 @@ export default function NotesIdPages() {
           <div className="detail-page__body">
             { parser(note.body) }
           </div>
+          <NotesIdPageAction
+            archived={note.archived || false}
+            handleArchive={handleArchive}
+            handleDelete={handleDelete}
+          />
         </>
       ) : ''}
       {(!('id' in note) && !loading) ? <NotFoundMessage /> : ''}
       {loading ? <LoadingIndicator /> : ''}
-
-      <NotesIdPageAction
-        archived={note.archived || false}
-        handleArchive={handleArchive}
-        handleDelete={handleDelete}
-      />
     </section>
   )
 }
