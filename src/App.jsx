@@ -21,7 +21,7 @@ function App() {
 
   const localeContextValue = useMemo(() => ({
     locale,
-    toggleLocale,
+    toggleLocale
   }), [locale])
 
   const authContextValue = useMemo(() => ({
@@ -61,7 +61,7 @@ function App() {
     /**
      * Inisialisasi Theme
      */
-    
+
     if (localStorage.theme) {
       changeTheme(localStorage.theme)
     } else {

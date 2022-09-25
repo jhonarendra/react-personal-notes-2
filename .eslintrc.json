@@ -27,6 +27,6 @@
                 "some": ["nesting", "id"]
             }
         }],
-        "no-alert": ["error", "never"]
+        "no-alert": ["off"]
     }
 }

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 function useTheme() {
   const [theme, setTheme] = useState('dark')
-  
+
   const changeTheme = (val) => {
     setTheme(val)
     const root = window.document.documentElement
