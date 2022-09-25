@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HomepageAction from '../components/index/HomePageAction'
 import LoadingIndicator from '../components/layout/LoadingIndicator'
 import NoteListEmpty from '../components/notes/NoteListEmpty'
@@ -46,11 +46,11 @@ export default function IndexPage() {
     if (initNotes) {
       let tempDataNotes = [...dataNotes]
       if (search !== '') {
+        // eslint-disable-next-line max-len
         tempDataNotes = tempDataNotes.filter((note) => note.title.toLowerCase().includes(search.toLowerCase()))
       }
       setNotes(tempDataNotes)
     }
-    
   }, [search])
   return (
     <section className="homepage">

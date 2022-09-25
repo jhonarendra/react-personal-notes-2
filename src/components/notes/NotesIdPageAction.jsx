@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { BiArchiveIn, BiArchiveOut } from 'react-icons/bi'

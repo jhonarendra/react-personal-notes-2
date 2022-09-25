@@ -25,9 +25,9 @@ export default function LoginPage() {
         if (!res.error) {
           putAccessToken(res.data.accessToken)
           getUserLogged()
-            .then((res) => {
-              if (!res.error) {
-                setAuth(res.data)
+            .then((r) => {
+              if (!r.error) {
+                setAuth(r.data)
               } else {
                 setAuth(null)
               }

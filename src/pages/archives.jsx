@@ -13,9 +13,10 @@ export default function ArchivesPage() {
   const [loading, setLoading] = useState(true)
   const [notes, setNotes] = useState([]) // filtered notes
   const [search, setSearch] = useInput('')
+  const textApp = useLanguage('app')
   const text = useLanguage('archive')
   const textNote = useLanguage('note')
-  
+
   /**
    * Inisialisasi data notes dari api
    */
@@ -30,7 +31,7 @@ export default function ArchivesPage() {
         }
       })
       .catch(() => {
-        alert(appPage[locale].msg.error)
+        alert(textApp.msg.error)
       })
   }
 
@@ -46,6 +47,7 @@ export default function ArchivesPage() {
     if (initNotes) {
       let tempDataNotes = [...dataNotes]
       if (search !== '') {
+        // eslint-disable-next-line max-len
         tempDataNotes = tempDataNotes.filter((note) => note.title.toLowerCase().includes(search.toLowerCase()))
       }
       setNotes(tempDataNotes)

@@ -43,14 +43,14 @@ export default function NotesIdPages() {
 
   const handleDelete = () => {
     if (confirm(textApp.msg.confirm)) {
-      deleteNote(id).then(res => {
+      deleteNote(id).then((res) => {
         if (!res.error) {
           navigate('/')
         }
       })
-      .catch(() => {
-        alert(textApp.msg.error)
-      })
+        .catch(() => {
+          alert(textApp.msg.error)
+        })
     }
   }
 

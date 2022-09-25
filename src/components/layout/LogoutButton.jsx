@@ -15,8 +15,9 @@ export default function LogoutButton() {
   }
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-    {
+      {
       auth ? (
         <button
           type="button"
