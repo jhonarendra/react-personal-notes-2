@@ -1,4 +1,4 @@
-const appLang = {
+const appPage = {
   id: {
     title: 'Aplikasi Catatan',
     nav: {
@@ -9,7 +9,14 @@ const appLang = {
       confirm: 'Apakah anda yakin?',
       loading: 'Memuat data...',
       error: 'Ada kesalahan teknis. Coba lagi nanti.'
-    }
+    },
+    add: 'Tambah',
+    cancel: 'Batal',
+    delete: 'Hapus',
+    archive: 'Arsipkan',
+    active: 'Aktifkan',
+    back: 'Kembali',
+    pageNotFound: 'Halaman Tidak Ditemukan.'
   },
   en: {
     title: 'Notes App',
@@ -21,7 +28,14 @@ const appLang = {
       confirm: 'Are you sure?',
       loading: 'Loading...',
       error: 'Error. Try again later.'
-    }
+    },
+    add: 'Add',
+    cancel: 'Cancel',
+    delete: 'Delete',
+    archive: 'Archive',
+    active: 'Active',
+    back: 'Back',
+    pageNotFound: 'Page Not Found'
   }
 }
 
@@ -101,8 +115,8 @@ const archivePage = {
   }
 }
 
-export {
-  appLang,
+const content = {
+  appPage,
   loginPage,
   registerPage,
   notePage,
@@ -110,3 +124,15 @@ export {
   notesIdPage,
   archivePage
 }
+
+export {
+  appPage,
+  loginPage,
+  registerPage,
+  notePage,
+  notesNewPage,
+  notesIdPage,
+  archivePage
+}
+
+export default content

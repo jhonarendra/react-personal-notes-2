@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import parser from 'html-react-parser'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { HiArrowLeft } from 'react-icons/hi'
@@ -8,23 +8,19 @@ import {
 } from '../../utils/network-data'
 import NotesIdPageAction from '../../components/notes/NotesIdPageAction'
 import NotFoundMessage from '../../components/layout/NotFoundMessage'
-import { appLang, notesIdPage } from '../../utils/content'
-import LocaleContext from '../../contexts/LocaleContext'
 import LoadingIndicator from '../../components/layout/LoadingIndicator'
+import useLanguage from '../../hooks/useLanguage'
 
 export default function NotesIdPages() {
-  const { locale } = useContext(LocaleContext)
   const [loading, setLoading] = useState(true)
   const [note, setNote] = useState({})
   const { id } = useParams()
+  const textApp = useLanguage('app')
+  const textNote = useLanguage('notesId')
   const navigate = useNavigate()
 
-  const handleEdit = () => {
-    navigate(`/notes/${id}/edit`)
-  }
-
   const handleArchive = () => {
-    if (confirm(appLang[locale].msg.confirm)) {
+    if (confirm(textApp.msg.confirm)) {
       let methods = null
       let navigateTo = '/'
       if (note.archived) {
@@ -40,20 +36,20 @@ export default function NotesIdPages() {
           }
         })
         .catch(() => {
-          alert(appLang[locale].msg.error)
+          alert(textApp.msg.error)
         })
     }
   }
 
   const handleDelete = () => {
-    if (confirm(appLang[locale].msg.confirm)) {
+    if (confirm(textApp.msg.confirm)) {
       deleteNote(id).then(res => {
         if (!res.error) {
           navigate('/')
         }
       })
       .catch(() => {
-        alert(appLang[locale].msg.error)
+        alert(textApp.msg.error)
       })
     }
   }
@@ -67,12 +63,12 @@ export default function NotesIdPages() {
         if (!res.error) {
           setNote(res.data)
         } else {
-          alert(notesIdPage[locale].notFound)
+          alert(textNote.notFound)
         }
         setLoading(false)
       })
       .catch(() => {
-        alert(appLang[locale].msg.error)
+        alert(textApp.msg.error)
       })
   }, [])
 
@@ -82,11 +78,11 @@ export default function NotesIdPages() {
         <>
           <Link
             to="/"
-            title="Kembali"
+            title={textApp.back}
           >
             <HiArrowLeft />
             {' '}
-            Kembali
+            { textApp.back }
           </Link>
           <h3 className="detail-page__title">
             { note.title }
@@ -97,18 +93,15 @@ export default function NotesIdPages() {
           <div className="detail-page__body">
             { parser(note.body) }
           </div>
+          <NotesIdPageAction
+            archived={note.archived || false}
+            handleArchive={handleArchive}
+            handleDelete={handleDelete}
+          />
         </>
       ) : ''}
       {(!('id' in note) && !loading) ? <NotFoundMessage /> : ''}
       {loading ? <LoadingIndicator /> : ''}
-
-      {/* TODO: tidak ada edit */}
-      <NotesIdPageAction
-        archived={note.archived || false}
-        handleEdit={handleEdit}
-        handleArchive={handleArchive}
-        handleDelete={handleDelete}
-      />
     </section>
   )
 }

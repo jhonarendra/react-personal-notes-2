@@ -1,9 +1,11 @@
 import React from 'react'
 import { HiPlus } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
+import useLanguage from '../../hooks/useLanguage'
 import PageAction from '../layout/PageAction'
 
 export default function HomePageAction() {
+  const text = useLanguage('app')
   const navigate = useNavigate()
 
   return (
@@ -11,7 +13,7 @@ export default function HomePageAction() {
       <button
         className="action"
         type="button"
-        title="Tambah"
+        title={text.add}
         onClick={() => navigate('/notes/new')}
       >
         <HiPlus />

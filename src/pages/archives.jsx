@@ -1,20 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HomepageAction from '../components/index/HomePageAction'
 import LoadingIndicator from '../components/layout/LoadingIndicator'
 import NoteListEmpty from '../components/notes/NoteListEmpty'
 import NotesList from '../components/notes/NotesList'
-import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
-import { archivePage, notePage } from '../utils/content'
+import useLanguage from '../hooks/useLanguage'
 import { getArchivedNotes } from '../utils/network-data'
 
-export default function IndexPage() {
-  const { locale } = useContext(LocaleContext)
+export default function ArchivesPage() {
   const [dataNotes, setDataNotes] = useState([]) // all notes from api
   const [initNotes, setInitNotes] = useState(false) // flag sudah ambil notes dari api
   const [loading, setLoading] = useState(true)
   const [notes, setNotes] = useState([]) // filtered notes
   const [search, setSearch] = useInput('')
+  const text = useLanguage('archive')
+  const textNote = useLanguage('note')
   
   /**
    * Inisialisasi data notes dari api
@@ -30,7 +30,7 @@ export default function IndexPage() {
         }
       })
       .catch(() => {
-        alert(appLang[locale].msg.error)
+        alert(appPage[locale].msg.error)
       })
   }
 
@@ -53,11 +53,11 @@ export default function IndexPage() {
   }, [search])
   return (
     <section className="homepage">
-      <h2>{ archivePage[locale].header }</h2>
+      <h2>{ text.header }</h2>
       <section className="search-bar">
         <input
           type="text"
-          placeholder={notePage[locale].searchPlaceholder}
+          placeholder={textNote.searchPlaceholder}
           value={search}
           onChange={setSearch}
         />

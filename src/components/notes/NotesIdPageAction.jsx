@@ -1,29 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { BiArchiveIn, BiArchiveOut } from 'react-icons/bi'
-import { AiOutlineEdit } from 'react-icons/ai'
 import PageAction from '../layout/PageAction'
+import useLanguage from '../../hooks/useLanguage'
 
 function NotesIdPageAction({
-  archived, handleEdit, handleArchive, handleDelete
+  archived, handleArchive, handleDelete
 }) {
+  const text = useLanguage('app')
+
   return (
     <PageAction page="detail-page">
       <>
-      {/* TODO: tidak ada edit */}
         <button
           className="action"
           type="button"
-          title="Edit"
-          onClick={() => handleEdit()}
-        >
-          <AiOutlineEdit />
-        </button>
-        <button
-          className="action"
-          type="button"
-          title={archived ? 'Aktifkan' : 'Arsipkan'}
+          title={archived ? text.active : text.archive}
           onClick={() => handleArchive()}
         >
           {archived ? <BiArchiveOut /> : <BiArchiveIn />}
@@ -31,7 +24,7 @@ function NotesIdPageAction({
         <button
           className="action"
           type="button"
-          title="Hapus"
+          title={text.delete}
           onClick={() => handleDelete()}
         >
           <HiOutlineTrash />
@@ -43,7 +36,6 @@ function NotesIdPageAction({
 
 NotesIdPageAction.propTypes = {
   archived: PropTypes.bool.isRequired,
-  handleEdit: PropTypes.func.isRequired,
   handleArchive: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired
 }

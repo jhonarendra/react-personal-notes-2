@@ -1,25 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { GrSun } from 'react-icons/gr'
 import { IoMdMoon } from 'react-icons/io'
+import useTheme from '../../hooks/useTheme'
 
-function ThemeToggler() {
-  const [theme, setTheme] = useState('dark')
-
-  const changeTheme = (val) => {
-    setTheme(val)
-    const root = window.document.documentElement
-    root.setAttribute('data-theme', val)
-    localStorage.setItem('theme', val)
-  }
-
-  useEffect(() => {
-    if (localStorage.theme) {
-      changeTheme(localStorage.theme)
-    } else {
-      localStorage.setItem('theme', 'dark')
-      changeTheme('dark')
-    }
-  }, [])
+export default function ThemeToggler() {
+  const [theme, changeTheme] = useTheme()
 
   return (
     <button
@@ -34,4 +19,3 @@ function ThemeToggler() {
   )
 }
 
-export default ThemeToggler

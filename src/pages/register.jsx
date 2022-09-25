@@ -1,18 +1,19 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
-import { appLang, registerPage } from '../utils/content'
+import useLanguage from '../hooks/useLanguage'
 import { register } from '../utils/network-data'
 
 export default function RegisterPage() {
-  const { locale } = useContext(LocaleContext)
   const [name, onNameChange] = useInput('')
   const [email, onEmailChange] = useInput('')
   const [password, onPasswordChange] = useInput('')
   const [confirmPassword, onConfirmPasswordChange] = useInput('')
 
   const navigate = useNavigate()
+
+  const textApp = useLanguage('app')
+  const textRegister = useLanguage('register')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -28,18 +29,18 @@ export default function RegisterPage() {
     register({ name, email, password })
       .then((res) => {
         if (!res.error) {
-          alert(registerPage[locale].msg.registerSuccess)
+          alert(textRegister.msg.registerSuccess)
           navigate('/login')
         }
       })
       .catch(() => {
-        alert(appLang[locale].msg.error)
+        alert(textApp.msg.error)
       })
   }
 
   return (
     <section className="register-page">
-      <h2>{ registerPage[locale].header }</h2>
+      <h2>{ textRegister.header }</h2>
       <form className="input-register" onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input
@@ -84,9 +85,9 @@ export default function RegisterPage() {
         <button type="submit">Register</button>
       </form>
       <p className="register-page__footer">
-        { registerPage[locale].footer }
+        { textRegister.footer }
         {' '}
-        <Link to="/login">{ registerPage[locale].footerLoginLink }</Link>
+        <Link to="/login">{ textRegister.footerLoginLink }</Link>
       </p>
     </section>
   )
