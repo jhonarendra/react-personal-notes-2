@@ -27,6 +27,7 @@
                 "some": ["nesting", "id"]
             }
         }],
-        "no-alert": ["off"]
+        "no-alert": ["off"],
+        "no-restricted-globals": ["error", "event", "fdescribe"]
     }
 }

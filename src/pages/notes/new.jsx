@@ -16,8 +16,8 @@ export default function NotesNewPages() {
   const textNote = useLanguage('notesNew')
   const navigate = useNavigate()
 
-  const [ title, setTitle ] = useInput('')
-  const [ body, setBody ] = useState(
+  const [title, setTitle] = useInput('')
+  const [body, setBody] = useState(
     EditorState.createWithContent(
       ContentState.createFromBlockArray(
         convertFromHTML(textNote.bodyPlaceholder)
@@ -25,8 +25,8 @@ export default function NotesNewPages() {
     )
   )
 
-  const onEditorStateChange = (body) => {
-    setBody(body)
+  const onEditorStateChange = (val) => {
+    setBody(val)
   }
 
   const handleSave = () => {
@@ -41,7 +41,6 @@ export default function NotesNewPages() {
       .catch(() => {
         alert(textApp.msg.error)
       })
-    
   }
 
   return (
