@@ -7,7 +7,7 @@ import useInput from '../hooks/useInput'
 import useLanguage from '../hooks/useLanguage'
 import { getArchivedNotes } from '../utils/network-data'
 
-export default function IndexPage() {
+export default function ArchivesPage() {
   const [dataNotes, setDataNotes] = useState([]) // all notes from api
   const [initNotes, setInitNotes] = useState(false) // flag sudah ambil notes dari api
   const [loading, setLoading] = useState(true)

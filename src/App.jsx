@@ -1,19 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import {
-  Navigate, Route, Routes
-} from 'react-router-dom'
-
-import IndexPage from './pages'
-import NotFoundPages from './pages/not-found'
-import ArchivesPage from './pages/archives'
-import NotesIdPages from './pages/notes/_id'
-import NotesNewPages from './pages/notes/new'
-import LoginPage from './pages/login'
-import RegisterPage from './pages/register'
+import Routes from './routes'
 import LocaleContext from './contexts/LocaleContext'
 import AuthContext from './contexts/AuthContext'
 import { getUserLogged } from './utils/network-data'
-import RouteMiddleware from './middleware/RouteMiddleware'
 import LoadingIndicator from './components/layout/LoadingIndicator'
 import HeaderComponent from './components/layout/HeaderComponent'
 
@@ -72,68 +61,7 @@ function App() {
               loading ? (
                 <LoadingIndicator />
               ) : (
-                <Routes>
-                  <Route
-                    path="/"
-                    element={(
-                      <RouteMiddleware middleware="auth">
-                        <IndexPage />
-                      </RouteMiddleware>
-                    )}
-                  />
-                  <Route
-                    path="/login"
-                    element={(
-                      <RouteMiddleware middleware="public">
-                        <LoginPage />
-                      </RouteMiddleware>
-                    )}
-                  />
-                  <Route
-                    path="/register"
-                    element={(
-                      <RouteMiddleware middleware="public">
-                        <RegisterPage />
-                      </RouteMiddleware>
-                      )}
-                  />
-                  <Route
-                    path="/archives"
-                    element={(
-                      <RouteMiddleware middleware="auth">
-                        <ArchivesPage />
-                      </RouteMiddleware>
-                    )}
-                  />
-                  <Route
-                    path="/notes"
-                    element={(
-                      <RouteMiddleware middleware="auth">
-                        <Navigate to="/" replace />
-                      </RouteMiddleware>
-                    )}
-                  />
-                  <Route
-                    path="/notes/new"
-                    element={(
-                      <RouteMiddleware middleware="auth">
-                        <NotesNewPages />
-                      </RouteMiddleware>
-                    )}
-                  />
-                  <Route
-                    path="/notes/:id"
-                    element={(
-                      <RouteMiddleware middleware="auth">
-                        <NotesIdPages />
-                      </RouteMiddleware>
-                    )}
-                  />
-                  <Route
-                    path="*"
-                    element={<NotFoundPages />}
-                  />
-                </Routes>
+                <Routes />
               )
             }
           </main>
