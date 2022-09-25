@@ -2,6 +2,7 @@
   "name": "notes-app-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jhonarendra.github.io/react-personal-notes-2",
   "dependencies": {
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
