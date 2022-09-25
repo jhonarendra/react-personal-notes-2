@@ -1,13 +1,12 @@
-import React, { useContext } from 'react'
-import LocaleContext from '../../contexts/LocaleContext'
-import { notePage } from '../../utils/content'
+import React from 'react'
+import useLanguage from '../../hooks/useLanguage'
 
 export default function NoteListEmpty() {
-  const { locale } = useContext(LocaleContext)
+  const text = useLanguage('note')
 
   return (
     <section className="notes-list-empty">
-      <p className="notes-list__empty">{ notePage[locale].empty }</p>
+      <p className="notes-list__empty">{ text.empty }</p>
     </section>
   )
 }

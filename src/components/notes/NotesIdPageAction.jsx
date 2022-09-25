@@ -3,20 +3,20 @@ import PropTypes from 'prop-types'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { BiArchiveIn, BiArchiveOut } from 'react-icons/bi'
 import PageAction from '../layout/PageAction'
-import LocaleContext from '../../contexts/LocaleContext'
-import { appLang } from '../../utils/content'
+import useLanguage from '../../hooks/useLanguage'
 
 function NotesIdPageAction({
   archived, handleArchive, handleDelete
 }) {
-  const { locale } = useContext(LocaleContext)
+  const text = useLanguage('app')
+
   return (
     <PageAction page="detail-page">
       <>
         <button
           className="action"
           type="button"
-          title={archived ? appLang[locale].active : appLang[locale].archive}
+          title={archived ? text.active : text.archive}
           onClick={() => handleArchive()}
         >
           {archived ? <BiArchiveOut /> : <BiArchiveIn />}
@@ -24,7 +24,7 @@ function NotesIdPageAction({
         <button
           className="action"
           type="button"
-          title={appLang[locale].delete}
+          title={text.delete}
           onClick={() => handleDelete()}
         >
           <HiOutlineTrash />

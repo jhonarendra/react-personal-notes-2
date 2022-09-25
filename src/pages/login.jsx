@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthContext from '../contexts/AuthContext'
-import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
-import { appLang, loginPage } from '../utils/content'
+import useLanguage from '../hooks/useLanguage'
 import { getUserLogged, login, putAccessToken } from '../utils/network-data'
 
 export default function LoginPage() {
-  const { locale } = useContext(LocaleContext)
   const { setAuth } = useContext(AuthContext)
   const [email, onEmailChange] = useInput('')
   const [password, onPasswordChange] = useInput('')
   const navigate = useNavigate()
+  const textApp = useLanguage('app')
+  const textLogin = useLanguage('login')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -34,7 +34,7 @@ export default function LoginPage() {
               navigate('/')
             })
             .catch(() => {
-              alert(appLang[locale].msg.error)
+              alert(textApp.msg.error)
             })
         }
       })
@@ -42,7 +42,7 @@ export default function LoginPage() {
 
   return (
     <section className="login-page">
-      <h2>{loginPage[locale].header}</h2>
+      <h2>{textLogin.header}</h2>
       <form className="input-login" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -67,9 +67,9 @@ export default function LoginPage() {
         <button type="submit">Login</button>
       </form>
       <p className="login-page__footer">
-        { loginPage[locale].footer }
+        { textLogin.footer }
         {' '}
-        <Link to="/register">{ loginPage[locale].footerRegisterLink }</Link>
+        <Link to="/register">{ textLogin.footerRegisterLink }</Link>
       </p>
     </section>
   )

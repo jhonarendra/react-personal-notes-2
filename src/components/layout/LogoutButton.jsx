@@ -1,15 +1,14 @@
 import React, { useContext } from 'react'
 import { MdLogout } from 'react-icons/md'
 import AuthContext from '../../contexts/AuthContext'
-import LocaleContext from '../../contexts/LocaleContext'
-import { appLang } from '../../utils/content'
+import useLanguage from '../../hooks/useLanguage'
 
 export default function LogoutButton() {
-  const { locale } = useContext(LocaleContext)
   const { auth } = useContext(AuthContext)
+  const text = useLanguage('app')
 
   const handleLogout = () => {
-    if (confirm(appLang[locale].msg.confirm)) {
+    if (confirm(text.msg.confirm)) {
       localStorage.removeItem('accessToken')
       window.location = '/'
     }

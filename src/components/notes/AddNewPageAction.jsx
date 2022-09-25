@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import { HiX, HiCheck } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import PageAction from '../layout/PageAction'
-import LocaleContext from '../../contexts/LocaleContext'
-import { appLang } from '../../utils/content'
+import useLanguage from '../../hooks/useLanguage'
 
 function AddNewPageAction({ handleSave }) {
-  const { locale } = useContext(LocaleContext)
+  const text = useLanguage('app')
   const navigate = useNavigate()
 
   return (
@@ -16,7 +15,7 @@ function AddNewPageAction({ handleSave }) {
         <button
           className="action"
           type="button"
-          title={appLang[locale].cancel}
+          title={text.cancel}
           onClick={() => navigate('/')}
         >
           <HiX />
@@ -24,7 +23,7 @@ function AddNewPageAction({ handleSave }) {
         <button
           className="action"
           type="button"
-          title={appLang[locale].add}
+          title={text.add}
           onClick={() => handleSave()}
         >
           <HiCheck />

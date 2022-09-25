@@ -1,4 +1,4 @@
-const appLang = {
+const appPage = {
   id: {
     title: 'Aplikasi Catatan',
     nav: {
@@ -115,8 +115,8 @@ const archivePage = {
   }
 }
 
-export {
-  appLang,
+const content = {
+  appPage,
   loginPage,
   registerPage,
   notePage,
@@ -124,3 +124,15 @@ export {
   notesIdPage,
   archivePage
 }
+
+export {
+  appPage,
+  loginPage,
+  registerPage,
+  notePage,
+  notesNewPage,
+  notesIdPage,
+  archivePage
+}
+
+export default content

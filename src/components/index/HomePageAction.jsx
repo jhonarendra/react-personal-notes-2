@@ -1,12 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { HiPlus } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
-import LocaleContext from '../../contexts/LocaleContext'
-import { appLang } from '../../utils/content'
+import useLanguage from '../../hooks/useLanguage'
 import PageAction from '../layout/PageAction'
 
 export default function HomePageAction() {
-  const { locale } = useContext(LocaleContext)
+  const text = useLanguage('app')
   const navigate = useNavigate()
 
   return (
@@ -14,7 +13,7 @@ export default function HomePageAction() {
       <button
         className="action"
         type="button"
-        title={appLang[locale].add}
+        title={text.add}
         onClick={() => navigate('/notes/new')}
       >
         <HiPlus />

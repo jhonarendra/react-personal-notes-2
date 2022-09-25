@@ -1,16 +1,15 @@
 import React, { useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import AuthContext from '../../contexts/AuthContext'
-import LocaleContext from '../../contexts/LocaleContext'
-import { appLang } from '../../utils/content'
+import useLanguage from '../../hooks/useLanguage'
 import LangToggler from './LangToggler'
 import LogoutButton from './LogoutButton'
 import ThemeToggler from './ThemeToggler'
 
 export default function NavMenu() {
-  const { locale } = useContext(LocaleContext)
   const { auth } = useContext(AuthContext)
   const { pathname } = useLocation()
+  const text = useLanguage('app')
   return (
     <>
       {
@@ -22,16 +21,16 @@ export default function NavMenu() {
                   pathname !== '/archives' ? (
                     <Link
                       to="/archives"
-                      title={appLang[locale].nav.archives}
+                      title={text.nav.archives}
                     >
-                      {appLang[locale].nav.archives}
+                      {text.nav.archives}
                     </Link>
                   ) : (
                     <Link
                       to="/"
-                      title={appLang[locale].nav.archives}
+                      title={text.nav.archives}
                     >
-                      {appLang[locale].nav.home}
+                      {text.nav.home}
                     </Link>
                   )
                 }

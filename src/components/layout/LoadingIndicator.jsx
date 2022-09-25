@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
-import LocaleContext from '../../contexts/LocaleContext'
-import { appLang } from '../../utils/content'
+import React from 'react'
+import useLanguage from '../../hooks/useLanguage'
 
 export default function LoadingIndicator() {
-  const { locale } = useContext(LocaleContext)
+  const text = useLanguage('app')
   return (
-    <p className='loading-indicator'>{ appLang[locale].msg.loading }</p>
+    <p className='loading-indicator'>{ text.msg.loading }</p>
   )
 }

@@ -8,19 +8,19 @@ import draftToHtml from 'draftjs-to-html'
 import AddNewPageAction from '../../components/notes/AddNewPageAction'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { addNote } from '../../utils/network-data'
-import LocaleContext from '../../contexts/LocaleContext'
-import { appLang, notesNewPage } from '../../utils/content'
 import useInput from '../../hooks/useInput'
+import useLanguage from '../../hooks/useLanguage'
 
 export default function NotesNewPages() {
-  const { locale } = useContext(LocaleContext)
+  const textApp = useLanguage('app')
+  const textNote = useLanguage('notesNew')
   const navigate = useNavigate()
 
   const [ title, setTitle ] = useInput('')
   const [ body, setBody ] = useState(
     EditorState.createWithContent(
       ContentState.createFromBlockArray(
-        convertFromHTML(notesNewPage[locale].bodyPlaceholder)
+        convertFromHTML(textNote.bodyPlaceholder)
       )
     )
   )
@@ -34,12 +34,12 @@ export default function NotesNewPages() {
     addNote({ title, body: bodyParsed })
       .then((res) => {
         if (!res.error) {
-          alert(notesNewPage[locale].msgSuccess)
+          alert(textNote.msgSuccess)
           navigate('/')
         }
       })
       .catch(() => {
-        alert(appLang[locale].msg.error)
+        alert(textApp.msg.error)
       })
     
   }
@@ -49,7 +49,7 @@ export default function NotesNewPages() {
       <div className="add-new-page__input">
         <input
           className="add-new-page__input__title"
-          placeholder={notesNewPage[locale].titlePlaceholder}
+          placeholder={textNote.titlePlaceholder}
           value={title}
           onChange={setTitle}
         />

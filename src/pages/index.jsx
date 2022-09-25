@@ -3,18 +3,18 @@ import HomepageAction from '../components/index/HomePageAction'
 import LoadingIndicator from '../components/layout/LoadingIndicator'
 import NoteListEmpty from '../components/notes/NoteListEmpty'
 import NotesList from '../components/notes/NotesList'
-import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
-import { appLang, notePage } from '../utils/content'
+import useLanguage from '../hooks/useLanguage'
 import { getActiveNotes } from '../utils/network-data'
 
 export default function IndexPage() {
-  const { locale } = useContext(LocaleContext)
   const [dataNotes, setDataNotes] = useState([]) // all notes from api
   const [initNotes, setInitNotes] = useState(false) // flag sudah ambil notes dari api
   const [loading, setLoading] = useState(true)
   const [notes, setNotes] = useState([]) // filtered notes
   const [search, setSearch] = useInput('')
+  const textApp = useLanguage('app')
+  const textNote = useLanguage('note')
 
   /**
    * Inisialisasi data notes dari api
@@ -30,7 +30,7 @@ export default function IndexPage() {
         }
       })
       .catch(() => {
-        alert(appLang[locale].msg.error)
+        alert(textApp.msg.error)
       })
   }
 
@@ -54,11 +54,11 @@ export default function IndexPage() {
   }, [search])
   return (
     <section className="homepage">
-      <h2>{ notePage[locale].header }</h2>
+      <h2>{ textNote.header }</h2>
       <section className="search-bar">
         <input
           type="text"
-          placeholder={notePage[locale].searchPlaceholder}
+          placeholder={textNote.searchPlaceholder}
           value={search}
           onChange={setSearch}
         />

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import {
-  Link, Navigate, Route, Routes
+  Navigate, Route, Routes
 } from 'react-router-dom'
 
 import IndexPage from './pages'
@@ -8,15 +8,14 @@ import NotFoundPages from './pages/not-found'
 import ArchivesPage from './pages/archives'
 import NotesIdPages from './pages/notes/_id'
 import NotesNewPages from './pages/notes/new'
-import NavMenu from './components/layout/NavMenu'
 import LoginPage from './pages/login'
 import RegisterPage from './pages/register'
 import LocaleContext from './contexts/LocaleContext'
 import AuthContext from './contexts/AuthContext'
-import { appLang } from './utils/content'
 import { getUserLogged } from './utils/network-data'
 import RouteMiddleware from './middleware/RouteMiddleware'
 import LoadingIndicator from './components/layout/LoadingIndicator'
+import HeaderComponent from './components/layout/HeaderComponent'
 
 function App() {
   const [auth, setAuth] = useState(null)
@@ -67,12 +66,7 @@ function App() {
     <LocaleContext.Provider value={localeContextValue}>
       <AuthContext.Provider value={authContextValue}>
         <div className="app-container">
-          <header>
-            <h1>
-              <Link to="/">{appLang[locale].title}</Link>
-            </h1>
-            <NavMenu />
-          </header>
+          <HeaderComponent />
           <main>
             {
               loading ? (
