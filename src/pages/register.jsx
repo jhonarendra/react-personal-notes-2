@@ -1,13 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
 import useLanguage from '../hooks/useLanguage'
-import { appPage, registerPage } from '../utils/content'
 import { register } from '../utils/network-data'
 
 export default function RegisterPage() {
-  const { locale } = useContext(LocaleContext)
   const [name, onNameChange] = useInput('')
   const [email, onEmailChange] = useInput('')
   const [password, onPasswordChange] = useInput('')

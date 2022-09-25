@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import useLanguage from '../../hooks/useLanguage'
 import NavMenu from './NavMenu'
 
-function HeaderComponent() {
+export default function HeaderComponent() {
   const text = useLanguage('app')
 
   return (
@@ -15,5 +15,3 @@ function HeaderComponent() {
     </header>
   )
 }
-
-export default HeaderComponent

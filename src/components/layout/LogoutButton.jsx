@@ -13,6 +13,7 @@ export default function LogoutButton() {
       window.location = '/'
     }
   }
+
   return (
     <>
     {

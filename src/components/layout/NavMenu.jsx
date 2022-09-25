@@ -10,6 +10,7 @@ export default function NavMenu() {
   const { auth } = useContext(AuthContext)
   const { pathname } = useLocation()
   const text = useLanguage('app')
+
   return (
     <>
       {

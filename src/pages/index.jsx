@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import HomepageAction from '../components/index/HomePageAction'
 import LoadingIndicator from '../components/layout/LoadingIndicator'
 import NoteListEmpty from '../components/notes/NoteListEmpty'

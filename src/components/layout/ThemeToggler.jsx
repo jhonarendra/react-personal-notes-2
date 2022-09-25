@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { GrSun } from 'react-icons/gr'
 import { IoMdMoon } from 'react-icons/io'
 
-function ThemeToggler() {
+export default function ThemeToggler() {
   const [theme, setTheme] = useState('dark')
 
   const changeTheme = (val) => {
@@ -34,4 +34,3 @@ function ThemeToggler() {
   )
 }
 
-export default ThemeToggler
