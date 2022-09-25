@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import AuthContext from '../contexts/AuthContext'
 import LocaleContext from '../contexts/LocaleContext'
 import useInput from '../hooks/useInput'
 import { appLang, loginPage } from '../utils/content'
 import { getUserLogged, login, putAccessToken } from '../utils/network-data'
 
 export default function LoginPage() {
-  const { setAuth, locale } = useContext(LocaleContext)
+  const { locale } = useContext(LocaleContext)
+  const { setAuth } = useContext(AuthContext)
   const [email, onEmailChange] = useInput('')
   const [password, onPasswordChange] = useInput('')
   const navigate = useNavigate()

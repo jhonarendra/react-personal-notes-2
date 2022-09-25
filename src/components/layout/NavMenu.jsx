@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import AuthContext from '../../contexts/AuthContext'
 import LocaleContext from '../../contexts/LocaleContext'
 import { appLang } from '../../utils/content'
 import LangToggler from './LangToggler'
@@ -7,7 +8,8 @@ import LogoutButton from './LogoutButton'
 import ThemeToggler from './ThemeToggler'
 
 export default function NavMenu() {
-  const { auth, locale } = useContext(LocaleContext)
+  const { locale } = useContext(LocaleContext)
+  const { auth } = useContext(AuthContext)
   const { pathname } = useLocation()
   return (
     <>

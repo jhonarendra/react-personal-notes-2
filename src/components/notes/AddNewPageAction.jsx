@@ -7,7 +7,7 @@ import LocaleContext from '../../contexts/LocaleContext'
 import { appLang } from '../../utils/content'
 
 function AddNewPageAction({ handleSave }) {
-  const {locale } = useContext(LocaleContext)
+  const { locale } = useContext(LocaleContext)
   const navigate = useNavigate()
 
   return (

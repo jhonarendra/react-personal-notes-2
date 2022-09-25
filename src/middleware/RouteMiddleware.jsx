@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Navigate, useLocation } from 'react-router-dom'
-import LocaleContext from '../contexts/LocaleContext'
+import AuthContext from '../contexts/AuthContext'
 
 function RouteMiddleware({ children, middleware }) {
-  const { auth } = useContext(LocaleContext)
+  const { auth } = useContext(AuthContext)
   const location = useLocation()
 
   const listMiddleware = ['auth', 'public']

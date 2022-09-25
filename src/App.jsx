@@ -12,6 +12,7 @@ import NavMenu from './components/layout/NavMenu'
 import LoginPage from './pages/login'
 import RegisterPage from './pages/register'
 import LocaleContext from './contexts/LocaleContext'
+import AuthContext from './contexts/AuthContext'
 import { appLang } from './utils/content'
 import { getUserLogged } from './utils/network-data'
 import RouteMiddleware from './middleware/RouteMiddleware'
@@ -30,22 +31,29 @@ function App() {
   const localeContextValue = useMemo(() => ({
     locale,
     toggleLocale,
+  }), [locale])
+
+  const authContextValue = useMemo(() => ({
     auth,
     setAuth
-  }), [locale, auth])
+  }), [auth])
 
   useEffect(() => {
     /**
      * Get User Logged
      */
-    getUserLogged().then((res) => {
-      if (!res.error) {
-        setAuth(res.data)
-      } else {
-        setAuth(null)
-      }
-      setLoading(false)
-    })
+    getUserLogged()
+      .then((res) => {
+        if (!res.error) {
+          setAuth(res.data)
+        } else {
+          setAuth(null)
+        }
+        setLoading(false)
+      })
+      .catch(() => {
+        alert('Error')
+      })
 
     /**
      * Inisialisasi Locale
@@ -57,86 +65,86 @@ function App() {
 
   return (
     <LocaleContext.Provider value={localeContextValue}>
-      <div className="app-container">
-        <header>
-          <h1>
-            <Link to="/">{appLang[locale].title}</Link>
-          </h1>
-          <NavMenu />
-        </header>
-        <main>
-          {
-            loading ? (
-              <LoadingIndicator />
-            ) : (
-              <Routes>
-                <Route
-                  path="/"
-                  element={(
-                    <RouteMiddleware middleware="auth">
-                      <IndexPage />
-                    </RouteMiddleware>
-                  )}
-                />
-                <Route
-                  path="/login"
-                  element={(
-                    <RouteMiddleware middleware="public">
-                      <LoginPage />
-                    </RouteMiddleware>
-                  )}
-                />
-                <Route
-                  path="/register"
-                  element={(
-                    <RouteMiddleware middleware="public">
-                      <RegisterPage />
-                    </RouteMiddleware>
+      <AuthContext.Provider value={authContextValue}>
+        <div className="app-container">
+          <header>
+            <h1>
+              <Link to="/">{appLang[locale].title}</Link>
+            </h1>
+            <NavMenu />
+          </header>
+          <main>
+            {
+              loading ? (
+                <LoadingIndicator />
+              ) : (
+                <Routes>
+                  <Route
+                    path="/"
+                    element={(
+                      <RouteMiddleware middleware="auth">
+                        <IndexPage />
+                      </RouteMiddleware>
                     )}
-                />
-                <Route
-                  path="/archives"
-                  element={(
-                    <RouteMiddleware middleware="auth">
-                      <ArchivesPage />
-                    </RouteMiddleware>
-                  )}
-                />
-                <Route
-                  path="/notes"
-                  element={(
-                    <RouteMiddleware middleware="auth">
-                      <Navigate to="/" replace />
-                    </RouteMiddleware>
-                  )}
-                />
-                <Route
-                  path="/notes/new"
-                  element={(
-                    <RouteMiddleware middleware="auth">
-                      <NotesNewPages />
-                    </RouteMiddleware>
-                  )}
-                />
-                <Route
-                  path="/notes/:id"
-                  element={(
-                    <RouteMiddleware middleware="auth">
-                      <NotesIdPages />
-                    </RouteMiddleware>
-                  )}
-                />
-                <Route
-                  path="*"
-                  element={<NotFoundPages />}
-                />
-              </Routes>
-            )
-          }
-        </main>
-      </div>
-      
-
+                  />
+                  <Route
+                    path="/login"
+                    element={(
+                      <RouteMiddleware middleware="public">
+                        <LoginPage />
+                      </RouteMiddleware>
+                    )}
+                  />
+                  <Route
+                    path="/register"
+                    element={(
+                      <RouteMiddleware middleware="public">
+                        <RegisterPage />
+                      </RouteMiddleware>
+                      )}
+                  />
+                  <Route
+                    path="/archives"
+                    element={(
+                      <RouteMiddleware middleware="auth">
+                        <ArchivesPage />
+                      </RouteMiddleware>
+                    )}
+                  />
+                  <Route
+                    path="/notes"
+                    element={(
+                      <RouteMiddleware middleware="auth">
+                        <Navigate to="/" replace />
+                      </RouteMiddleware>
+                    )}
+                  />
+                  <Route
+                    path="/notes/new"
+                    element={(
+                      <RouteMiddleware middleware="auth">
+                        <NotesNewPages />
+                      </RouteMiddleware>
+                    )}
+                  />
+                  <Route
+                    path="/notes/:id"
+                    element={(
+                      <RouteMiddleware middleware="auth">
+                        <NotesIdPages />
+                      </RouteMiddleware>
+                    )}
+                  />
+                  <Route
+                    path="*"
+                    element={<NotFoundPages />}
+                  />
+                </Routes>
+              )
+            }
+          </main>
+        </div>
+      </AuthContext.Provider>
     </LocaleContext.Provider>
   )
 }
