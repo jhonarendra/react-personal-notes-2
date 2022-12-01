@@ -54,9 +54,6 @@ export default function NotesNewPages() {
         />
         <Editor
           editorState={body}
-          toolbarClassName="toolbarClassName"
-          wrapperClassName="wrapperClassName"
-          editorClassName="editorClassName"
           onEditorStateChange={onEditorStateChange}
         />
       </div>
